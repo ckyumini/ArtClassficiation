@@ -116,7 +116,7 @@ def main():
     val_losses = []
     train_accs = []
     val_accs = []
-    '''
+    
     for epoch in range(config['training']['num_epochs']):
         print(f"\nEpoch {epoch + 1}/{config['training']['num_epochs']}")
         train_loss, train_acc = train_one_epoch(model, train_loader, criterion, optimizer, device, scaler, config['training']['gradient_accumulation_steps'])
@@ -143,13 +143,13 @@ def main():
             if no_improvement >= config['training']['patience']:
                 print("조기 종료가 트리거되었습니다.")
                 break
-       '''
+       
     # 최적의 모델 로드
     model.load_state_dict(torch.load(config['MODEL_SAVE_PATH']))
     print("최적의 모델이 로드되었습니다.")
 
     # 손실 및 정확도 추세 시각화
-    #plot_metrics(train_losses, val_losses, train_accs, val_accs, epoch + 1)
+    plot_metrics(train_losses, val_losses, train_accs, val_accs, epoch + 1)
 
     # 테스트 데이터 평가
     test(model, test_loader, criterion, device)
